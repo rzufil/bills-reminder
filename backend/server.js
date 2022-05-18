@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const dotenv = require('dotenv').config();
 const { errorHandler } = require('./middlewares/errorMiddleware');
 const { scheduleCron } = require('./utils/cron');
