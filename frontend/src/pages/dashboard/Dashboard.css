@@ -1,0 +1,14 @@
+.dashboard-container {
+    padding: 100px 20px;
+    text-align: center;
+}
+
+.create-btn {
+    display: inline !important;
+}
+
+.bills {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}

@@ -1,0 +1,15 @@
+.navbar ul li {
+    float: left;
+    margin: 0;
+    padding: 5px;
+    border: 0;
+}
+
+.navbar .navbar-brand .text,
+.navbar .navbar-brand .icon {
+    vertical-align: middle;
+}
+
+.nav-item span {
+    padding-left: 5px;
+}

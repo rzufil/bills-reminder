@@ -1,0 +1,50 @@
+{
+    "1": {
+        "name": "Housing",
+        "color": "green"
+    },
+    "2": {
+        "name": "Transportation",
+        "color": "aqua"
+    },
+    "3": {
+        "name": "Food",
+        "color": "brown"
+    },
+    "4": {
+        "name": "Utilities",
+        "color": "cadetblue"
+    },
+    "5": {
+        "name": "Clothing",
+        "color": "coral"
+    },
+    "6": {
+        "name": "Medical",
+        "color": "lightpink"
+    },
+    "7": {
+        "name": "Insurance",
+        "color": "gold"
+    },
+    "8": {
+        "name": "Personal",
+        "color": "grey"
+    },
+    "9": {
+        "name": "Debt",
+        "color": "olive"
+    },
+    "10": {
+        "name": "Retirement",
+        "color": "rosybrown"
+    },
+    "11": {
+        "name": "Entertainment",
+        "color": "magenta"
+    },
+    "12": {
+        "name": "Others",
+        "color": "Black"
+    }
+}

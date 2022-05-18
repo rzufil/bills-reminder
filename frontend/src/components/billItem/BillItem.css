@@ -1,0 +1,17 @@
+.bill {
+    display: contents;
+    padding: 20px;
+}
+
+.bill .card {
+    border-left-width: thick;
+}
+
+.bill .close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+    border: none;
+    background: none;
+}
