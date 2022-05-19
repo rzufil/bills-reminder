@@ -1,5 +1,5 @@
 .dashboard-container {
-    padding: 100px 20px;
+    padding: 100px 0px;
     text-align: center;
 }
 
@@ -11,4 +11,10 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
+}
+
+@media (max-width: 600px) {
+    .bills {
+        grid-template-columns: repeat(1, 1fr);
+    }
 }

@@ -5,13 +5,26 @@
 
 .bill .card {
     border-left-width: thick;
+    min-width: 140px;
 }
 
-.bill .close {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    cursor: pointer;
-    border: none;
-    background: none;
+.card-footer {
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+}
+
+.bill-footer-remove-btn {
+    padding: 10px 20px;
+    border: 1px solid red;
+    border-radius: 5px;
+    background: red;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 700;
+    margin: 5px;
+}
+
+.bill-footer-remove-btn:hover {
+    background: lightcoral;
+    border: 1px solid lightcoral;
 }

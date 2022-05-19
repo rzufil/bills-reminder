@@ -102,7 +102,7 @@ const BillForm = ({ toggleModal }) => {
         <div className='form-group'>
           <label htmlFor='name'>Notes</label>
           <input
-            type='textarea'
+            type='text'
             name='notes'
             value={notes}
             onChange={(e) => setNotes(e.target.value)}

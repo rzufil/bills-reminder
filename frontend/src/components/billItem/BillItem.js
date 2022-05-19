@@ -43,8 +43,10 @@ const BillItem = ({ bill }) => {
   };
 
   const removeBill = async (id) => {
-    await dispatch(deleteBill(id));
-    toast.success('Reminder has been been deleted.');
+    if (window.confirm('Delete the bill reminder?')) {
+      await dispatch(deleteBill(id));
+      toast.success('Reminder has been been deleted.');
+    }
   };
 
   return (
@@ -59,9 +61,14 @@ const BillItem = ({ bill }) => {
           <p className='card-text'>{getCategoryName(bill.category)}</p>
           <p className='card-text'>{bill.notes}</p>
         </div>
-        <button onClick={() => removeBill(bill._id)} className='close'>
-          X
-        </button>
+        <div className='card-footer'>
+          <button
+            className='bill-footer-remove-btn'
+            onClick={() => removeBill(bill._id)}
+          >
+            <span>Remove</span>
+          </button>
+        </div>
       </div>
     </div>
   );
