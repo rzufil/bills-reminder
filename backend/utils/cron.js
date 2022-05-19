@@ -7,11 +7,11 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const scheduleCron = () => {
     cron.schedule('0 0 * * *', async () => {
-        console.log('Running cron.');
         const date = new Date();
+        console.log(`Running cron at ${date.toUTCString()}.`);
         const dueBills = await billModel.aggregate()
             .match({
-                dueDate: date.getDate()
+                dueDate: date.getUTCDate()
             })
             .group({
                 _id: '$user',
@@ -34,20 +34,22 @@ const scheduleCron = () => {
             const reminders = _user.reminders;
             let remindersText = '';
             reminders.forEach((reminder) => {
-                if (reminder.dueMonth !== null && reminder.dueMonth !== date.getMonth() + 1) {
+                if (reminder.dueMonth !== null && reminder.dueMonth !== date.getUTCMonth() + 1) {
                     return;
                 }
                 remindersText += reminder.notes.length
                     ? ` - ${reminder.name} (${reminder.notes})\n`
                     : ` - ${reminder.name}\n`;
             });
-            const emailText = `Hello ${userName},\nThe following bills should be paid today:\n${remindersText}`;
+            const emailText = `Hello ${userName},\nThe following bills should be paid today (${date.toDateString()}):\n${remindersText}`;
             const msg = {
                 to: userEmail,
                 from: process.env.SENDGRID_SENDER_EMAIL,
                 subject: 'Bills due today!',
                 text: emailText,
             }
+            console.log('Sending email:');
+            console.log(msg);
             sgMail.send(msg);
         });
     }, {

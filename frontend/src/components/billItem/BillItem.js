@@ -17,7 +17,7 @@ const BillItem = ({ bill }) => {
   const month = date.getMonth() + 1; // Months range from 0-11
   let dueDate;
   if (bill.repeat === 'month') {
-    const monthIncrement = bill.dueDate > day ? 0 : 1;
+    const monthIncrement = bill.dueDate >= day ? 0 : 1;
     dueDate = new Date(date.getFullYear(), month - 1 + monthIncrement, bill.dueDate);
   } else if (bill.repeat === 'year') {
     let yearIncrement = 0;
