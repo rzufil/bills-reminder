@@ -1,9 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { FaInstagram, FaFacebook, FaTwitter, FaYoutube, FaCalendarCheck } from 'react-icons/fa';
 import './Footer.css';
 
 const Footer = () => {
+    const { user } = useSelector((state) => state.auth);
+
+    const scrollToTop = () => {
+        window.scroll({top: 0, left: 0, behavior: 'smooth'});
+    }
+
     return (
         <footer className='page-footer font-small blue pt-4 bg-dark shadow'>
             <div className='container text-center text-md-left'>
@@ -20,19 +27,27 @@ const Footer = () => {
                         <h5 className='text-uppercase'>Links</h5>
                         <ul className='list-unstyled'>
                             <li>
-                                <Link to='/'>Homepage</Link>
+                                <Link to='/' onClick={() => scrollToTop()}>Homepage</Link>
+                            </li>
+                            {user ? (
+                                <li>
+                                    <Link to='/dashboard' onClick={() => scrollToTop()}>Dashboard</Link>
+                                </li>
+                            ) : (
+                                <>
+                                    <li>
+                                        <Link to='/login' onClick={() => scrollToTop()}>Login</Link>
+                                    </li>
+                                    <li>
+                                        <Link to='/register' onClick={() => scrollToTop()}>Register</Link>
+                                    </li>
+                                </>
+                            )}
+                            <li>
+                                <Link to='/about' onClick={() => scrollToTop()}>About</Link>
                             </li>
                             <li>
-                                <Link to='/login'>Login</Link>
-                            </li>
-                            <li>
-                                <Link to='/register'>Register</Link>
-                            </li>
-                            <li>
-                                <Link to='/about'>About</Link>
-                            </li>
-                            <li>
-                                <Link to='/contact'>Contact Us</Link>
+                                <Link to='/contact' onClick={() => scrollToTop()}>Contact Us</Link>
                             </li>
                         </ul>
                     </div>
