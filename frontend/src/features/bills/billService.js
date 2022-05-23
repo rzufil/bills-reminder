@@ -25,6 +25,9 @@ const getBills = async (token) => {
 
   const response = await axios.get(API_URL, config);
 
+  // Sorting bills by category
+  response.data.sort((a, b) => a.category - b.category);
+
   return response.data;
 }
 
