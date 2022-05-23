@@ -29,28 +29,30 @@ const scheduleCron = () => {
         dueBills.map(async (_user) => {
             const userId = _user._id.toString();
             const user = await userModel.find({ _id: userId });
-            const userName = user[0].name;
-            const userEmail = user[0].email;
-            const reminders = _user.reminders;
-            let remindersText = '';
-            reminders.forEach((reminder) => {
-                if (reminder.dueMonth !== null && reminder.dueMonth !== date.getUTCMonth() + 1) {
-                    return;
+            if (user[0] && !user[0].optOut) {
+                const userName = user[0].name;
+                const userEmail = user[0].email;
+                const reminders = _user.reminders;
+                let remindersText = '';
+                reminders.forEach((reminder) => {
+                    if (reminder.dueMonth !== null && reminder.dueMonth !== date.getUTCMonth() + 1) {
+                        return;
+                    }
+                    remindersText += reminder.notes.length
+                        ? ` - ${reminder.name} (${reminder.notes})\n`
+                        : ` - ${reminder.name}\n`;
+                });
+                const emailText = `Hello ${userName},\nThe following bills should be paid today (${date.toDateString()}):\n${remindersText}`;
+                const msg = {
+                    to: userEmail,
+                    from: process.env.SENDGRID_SENDER_EMAIL,
+                    subject: 'Bills due today!',
+                    text: emailText,
                 }
-                remindersText += reminder.notes.length
-                    ? ` - ${reminder.name} (${reminder.notes})\n`
-                    : ` - ${reminder.name}\n`;
-            });
-            const emailText = `Hello ${userName},\nThe following bills should be paid today (${date.toDateString()}):\n${remindersText}`;
-            const msg = {
-                to: userEmail,
-                from: process.env.SENDGRID_SENDER_EMAIL,
-                subject: 'Bills due today!',
-                text: emailText,
+                console.log('Sending email:');
+                console.log(msg);
+                sgMail.send(msg);
             }
-            console.log('Sending email:');
-            console.log(msg);
-            sgMail.send(msg);
         });
     }, {
         timezone: 'UTC'

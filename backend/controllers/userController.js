@@ -39,6 +39,7 @@ const registerUser = asyncHandler(async (req, res) => {
             _id: user.id,
             name: user.name,
             email: user.email,
+            optOut: user.optOut,
             token: tokenHelper.generateJwt(user._id),
         });
     } else {
@@ -62,6 +63,7 @@ const loginUser = asyncHandler(async (req, res) => {
             _id: user.id,
             name: user.name,
             email: user.email,
+            optOut: user.optOut,
             token: tokenHelper.generateJwt(user._id),
         });
     } else {
@@ -71,9 +73,35 @@ const loginUser = asyncHandler(async (req, res) => {
 });
 
 /**
+ * @desc    Update user data
+ * @route   PUT /api/users
+ * @access  Private
+ */
+ const updateUser = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.user._id);
+
+    if (!user) {
+        res.status(400);
+        throw new Error('User not found.');
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(req.user._id, req.body, {
+        new: true,
+    });
+
+    res.status(200).json({
+        _id: updatedUser.id,
+        name: updatedUser.name,
+        email: updatedUser.email,
+        optOut: updatedUser.optOut,
+        token: tokenHelper.generateJwt(updatedUser._id),
+    });
+});
+
+/**
  * @desc    Get user data
  * @route   GET /api/users/me
- * @access  Public
+ * @access  Private
  */
 const getMe = asyncHandler(async (req, res) => {
     res.status(200).json(req.user);
@@ -82,5 +110,6 @@ const getMe = asyncHandler(async (req, res) => {
 module.exports = {
     registerUser,
     loginUser,
+    updateUser,
     getMe,
 };

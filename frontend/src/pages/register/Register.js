@@ -58,7 +58,7 @@ const Register = () => {
 
       dispatch(register(userData));
     }
-  }
+  };
 
   if (isLoading) {
     return <Spinner />;

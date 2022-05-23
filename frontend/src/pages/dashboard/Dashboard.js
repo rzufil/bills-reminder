@@ -5,12 +5,15 @@ import BillForm from '../../components/billForm/BillForm';
 import BillItem from '../../components/billItem/BillItem';
 import Spinner from '../../components/spinner/Spinner';
 import { getBills, reset } from '../../features/bills/billSlice';
+import { update } from '../../features/auth/authSlice';
 import { Button, Modal } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import './Dashboard.css';
 
 const Dashboard = () => {
   const [showModal, setShowModal] = useState(false);
+  const [disabled, setDisabled] = useState(false);
+  const [checked, setChecked] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -30,11 +33,28 @@ const Dashboard = () => {
     }
 
     dispatch(getBills());
+    setChecked(!user.optOut);
 
     return () => {
       dispatch(reset());
     }
   }, [user, navigate, isError, message, dispatch]);
+
+  const toggleNotifications = async () => {
+    const optOut = user.optOut;
+    let userData = {
+      optOut: !optOut
+    };
+    setDisabled(true);
+    setChecked(!checked);
+    const response = await dispatch(update(userData));
+    if (response.payload?.optOut !== optOut) {
+      toast.success('Notification settings have been changed.');
+    } else {
+      toast.error('There was an error while changing the notifications settings.');
+    }
+    setDisabled(false);
+  };
 
   if (isLoading) {
     return <Spinner />;
@@ -66,11 +86,31 @@ const Dashboard = () => {
 
       <section className='dashboard-container'>
         {bills.length > 0 ? (
-          <div className='bills container'>
-            {bills.map((bill) => (
-              <BillItem key={bill._id} bill={bill} />
-            ))}
-          </div>
+          <>
+            <div className='notification-toggler container'>
+              <span>Email Notifications?</span>
+              <div className='toggle-switch'>
+                <input
+                  type='checkbox'
+                  className='checkbox'
+                  name='Email Notifications'
+                  id='email-notifications'
+                  disabled={disabled}
+                  onChange={toggleNotifications}
+                  checked={checked}
+                />
+                <label className='label' htmlFor='email-notifications'>
+                  <span className='inner' />
+                  <span className='switch' />
+                </label>
+              </div>
+            </div>
+            <div className='bills container'>
+              {bills.map((bill) => (
+                <BillItem key={bill._id} bill={bill} />
+              ))}
+            </div>
+          </>
         ) : (
           <h3>You have not created any bill reminders</h3>
         )}
