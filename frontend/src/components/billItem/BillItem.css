@@ -28,3 +28,12 @@
     background: lightcoral;
     border: 1px solid lightcoral;
 }
+
+.category-icon {
+    padding-right: 5px;
+    vertical-align: middle;
+}
+
+.category-text {
+    vertical-align: middle;
+}

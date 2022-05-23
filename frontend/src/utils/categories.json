@@ -1,50 +1,67 @@
 {
     "1": {
         "name": "Housing",
-        "color": "green"
+        "color": "green",
+        "icon": "FaHome"
     },
     "2": {
         "name": "Transportation",
-        "color": "aqua"
+        "color": "aqua",
+        "icon": "FaCar"
     },
     "3": {
         "name": "Food",
-        "color": "brown"
+        "color": "brown",
+        "icon": "FaUtensils"
     },
     "4": {
         "name": "Utilities",
-        "color": "cadetblue"
+        "color": "cadetblue",
+        "icon": "FaBolt"
     },
     "5": {
         "name": "Clothing",
-        "color": "coral"
+        "color": "coral",
+        "icon": "FaSocks"
     },
     "6": {
         "name": "Medical",
-        "color": "lightpink"
+        "color": "lightpink",
+        "icon": "FaClinicMedical"
     },
     "7": {
         "name": "Insurance",
-        "color": "gold"
+        "color": "gold",
+        "icon": "FaDollarSign"
     },
     "8": {
         "name": "Personal",
-        "color": "grey"
+        "color": "grey",
+        "icon": "FaFingerprint"
     },
     "9": {
         "name": "Debt",
-        "color": "olive"
+        "color": "olive",
+        "icon": "FaMoneyBillAlt"
     },
     "10": {
         "name": "Retirement",
-        "color": "rosybrown"
+        "color": "rosybrown",
+        "icon": "FaUserClock"
     },
     "11": {
         "name": "Entertainment",
-        "color": "magenta"
+        "color": "magenta",
+        "icon": "FaGlassMartiniAlt"
     },
     "12": {
+        "name": "Education",
+        "color": "purple",
+        "icon": "FaBook"
+    },
+    "13": {
         "name": "Others",
-        "color": "Black"
+        "color": "black",
+        "icon": "FaAsterisk"
     }
 }

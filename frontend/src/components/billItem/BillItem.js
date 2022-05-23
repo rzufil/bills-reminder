@@ -2,6 +2,21 @@ import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { deleteBill } from '../../features/bills/billSlice';
 import categories from '../../utils/categories.json';
+import {
+  FaHome,
+  FaCar,
+  FaUtensils,
+  FaBolt,
+  FaSocks,
+  FaClinicMedical,
+  FaDollarSign,
+  FaFingerprint,
+  FaMoneyBillAlt,
+  FaUserClock,
+  FaGlassMartiniAlt,
+  FaBook,
+  FaAsterisk
+} from 'react-icons/fa';
 import './BillItem.css';
 
 const categoriesArray = [];
@@ -9,6 +24,22 @@ Object.entries(categories).forEach((category) => {
   const [key, value] = category;
   categoriesArray[key] = value;
 });
+
+const iconComponent = {
+  FaHome,
+  FaCar,
+  FaUtensils,
+  FaBolt,
+  FaSocks,
+  FaClinicMedical,
+  FaDollarSign,
+  FaFingerprint,
+  FaMoneyBillAlt,
+  FaUserClock,
+  FaGlassMartiniAlt,
+  FaBook,
+  FaAsterisk
+}
 
 const BillItem = ({ bill }) => {
   const dispatch = useDispatch();
@@ -42,6 +73,11 @@ const BillItem = ({ bill }) => {
     return categoriesArray[category]['name'];
   };
 
+  const getCategoryIcon = (category) => {
+    const IconComponent = iconComponent[categoriesArray[category]['icon']];
+    return <IconComponent />;
+  };
+
   const removeBill = async (id) => {
     if (window.confirm('Delete the bill reminder?')) {
       await dispatch(deleteBill(id));
@@ -58,7 +94,14 @@ const BillItem = ({ bill }) => {
         <div className='card-body'>
           <h5 className='card-title'>Due on {dueDate.toLocaleDateString('en-US')}</h5>
           <p className='card-text'>Repeats every {bill.repeat}</p>
-          <p className='card-text'>{getCategoryName(bill.category)}</p>
+          <p className='card-text'>
+            <span className='category-icon'>
+              {getCategoryIcon(bill.category)}
+            </span>
+            <span className='category-text'>
+              {getCategoryName(bill.category)}
+            </span>
+          </p>
           <p className='card-text'>{bill.notes}</p>
         </div>
         <div className='card-footer'>
