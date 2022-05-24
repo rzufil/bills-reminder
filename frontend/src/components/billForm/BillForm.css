@@ -1,0 +1,33 @@
+.notification-tooltip-container {
+    align-items: center;
+}
+
+.notification-tooltip {
+    cursor: default;
+    position: relative;
+    display: inline-block;
+    color: #212529;
+    padding-left: 5px;
+}
+
+.notification-tooltip-symbol {
+    font-size: 20px;
+}
+
+.notification-tooltip .notification-tooltiptext {
+    cursor: default;
+    visibility: hidden;
+    width: 200px;
+    background-color: #212529;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+}
+
+.notification-tooltip:hover .notification-tooltiptext {
+    cursor: default;
+    visibility: visible;
+}

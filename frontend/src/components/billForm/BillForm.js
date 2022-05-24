@@ -66,7 +66,13 @@ const BillForm = ({ toggleModal }) => {
           </select>
         </div>
         <div className='form-group'>
-          <label htmlFor='name'>Due Date</label>
+          <div className='notification-tooltip-container d-flex'>
+            <label htmlFor='name'>Due Date</label>
+            <div className='notification-tooltip'>
+              <span className='notification-tooltip-symbol'>ⓘ</span>
+              <span className='notification-tooltiptext'>Notifications are sent out every day at midnight UTC, please plan accordingly.</span>
+            </div>
+          </div>
           <select
             name='duedate'
             id='duedate'
