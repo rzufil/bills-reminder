@@ -42,16 +42,18 @@ const scheduleCron = () => {
                         ? ` - ${reminder.name} (${reminder.notes})\n`
                         : ` - ${reminder.name}\n`;
                 });
-                const emailText = `Hello ${userName},\nThe following bills should be paid today (${date.toDateString()}):\n${remindersText}`;
-                const msg = {
-                    to: userEmail,
-                    from: process.env.SENDGRID_SENDER_EMAIL,
-                    subject: 'Bills due today!',
-                    text: emailText,
+                if (remindersText.length > 0) {
+                    const emailText = `Hello ${userName},\nThe following bills should be paid today (${date.toDateString()}):\n${remindersText}`;
+                    const msg = {
+                        to: userEmail,
+                        from: process.env.SENDGRID_SENDER_EMAIL,
+                        subject: 'Bills due today!',
+                        text: emailText,
+                    }
+                    console.log('Sending email:');
+                    console.log(msg);
+                    sgMail.send(msg);
                 }
-                console.log('Sending email:');
-                console.log(msg);
-                sgMail.send(msg);
             }
         });
     }, {
