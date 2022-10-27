@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import BillForm from '../../components/billForm/BillForm';
 import BillItem from '../../components/billItem/BillItem';
 import Spinner from '../../components/spinner/Spinner';
-import { getBills, reset } from '../../features/bills/billSlice';
-import { update } from '../../features/auth/authSlice';
+import { getBills } from '../../features/bills/billSlice';
+import { update, reset } from '../../features/auth/authSlice';
 import { Button, Modal } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import './Dashboard.css';
@@ -30,10 +30,10 @@ const Dashboard = () => {
 
     if (!user) {
       navigate('/login');
+    } else {
+      dispatch(getBills());
+      setChecked(!user.optOut);
     }
-
-    dispatch(getBills());
-    setChecked(!user.optOut);
 
     return () => {
       dispatch(reset());

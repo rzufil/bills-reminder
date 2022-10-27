@@ -8,7 +8,7 @@ const createBill = async (billData, token) => {
     headers: {
       Authorization: `Bearer ${token}`,
     },
-  }
+  };
 
   const response = await axios.post(API_URL, billData, config);
 
@@ -21,7 +21,7 @@ const getBills = async (token) => {
     headers: {
       Authorization: `Bearer ${token}`,
     },
-  }
+  };
 
   const response = await axios.get(API_URL, config);
 
@@ -37,7 +37,7 @@ const deleteBill = async (billId, token) => {
     headers: {
       Authorization: `Bearer ${token}`,
     },
-  }
+  };
 
   const response = await axios.delete(API_URL + billId, config);
 
@@ -48,6 +48,6 @@ const billService = {
   createBill,
   getBills,
   deleteBill,
-}
+};
 
 export default billService;

@@ -20,7 +20,7 @@ const sendEmail = asyncHandler(async (req, res) => {
         from: process.env.SENDGRID_SENDER_EMAIL,
         subject: 'New Contact Form Submission',
         text: emailText,
-    }
+    };
 
     try {
         sgMail.send(msg);

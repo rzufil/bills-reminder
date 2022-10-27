@@ -49,7 +49,7 @@ const scheduleCron = () => {
                         from: process.env.SENDGRID_SENDER_EMAIL,
                         subject: 'Bills due today!',
                         text: emailText,
-                    }
+                    };
                     console.log('Sending email:');
                     console.log(msg);
                     sgMail.send(msg);

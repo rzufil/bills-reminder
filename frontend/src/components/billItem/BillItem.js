@@ -39,7 +39,7 @@ const iconComponent = {
   FaGlassMartiniAlt,
   FaBook,
   FaAsterisk
-}
+};
 
 const BillItem = ({ bill }) => {
   const dispatch = useDispatch();

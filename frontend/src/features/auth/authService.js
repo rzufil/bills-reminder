@@ -1,13 +1,17 @@
 import axios from 'axios';
 
 const API_URL = '/api/users/';
+const expiryDays = 2592000 * 1000; // 30 days expiry time
 
 // Register user
 const register = async (userData) => {
   const response = await axios.post(API_URL, userData);
 
   if (response.data) {
-    localStorage.setItem('user', JSON.stringify(response.data));
+    localStorage.setItem('user', JSON.stringify({
+      value: JSON.stringify(response.data),
+      expiry: Date.now() + expiryDays,
+    }));
   }
 
   return response.data;
@@ -18,7 +22,10 @@ const login = async (userData) => {
   const response = await axios.post(API_URL + 'login', userData);
 
   if (response.data) {
-    localStorage.setItem('user', JSON.stringify(response.data));
+    localStorage.setItem('user', JSON.stringify({
+      value: JSON.stringify(response.data),
+      expiry: Date.now() + expiryDays,
+    }));
   }
 
   return response.data;
@@ -30,12 +37,15 @@ const update = async (userData, token) => {
     headers: {
       Authorization: `Bearer ${token}`,
     },
-  }
+  };
 
   const response = await axios.put(API_URL, userData, config);
 
   if (response.data) {
-    localStorage.setItem('user', JSON.stringify(response.data));
+    localStorage.setItem('user', JSON.stringify({
+      value: JSON.stringify(response.data),
+      expiry: Date.now() + expiryDays,
+    }));
   }
 
   return response.data;
@@ -51,6 +61,6 @@ const authService = {
   logout,
   login,
   update,
-}
+};
 
 export default authService;
