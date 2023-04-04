@@ -81,7 +81,7 @@ const BillItem = ({ bill }) => {
   const removeBill = async (id) => {
     if (window.confirm('Delete the bill reminder?')) {
       await dispatch(deleteBill(id));
-      toast.success('Reminder has been been deleted.');
+      toast.success('Reminder has been deleted.');
     }
   };
 
