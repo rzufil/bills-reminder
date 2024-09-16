@@ -12,7 +12,7 @@ const Home = () => {
                 <div className='hero-image'>
                     <div className='hero-text'>
                         <h1>Bills Reminder</h1>
-                        <p>Never forger to pay your bills</p>
+                        <p>Never forget to pay your bills</p>
                         <p>Receive email notifications when your bills are due</p>
                     </div>
                 </div>
